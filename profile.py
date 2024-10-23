@@ -85,6 +85,9 @@ pc.defineParameter("tempFileSystemMount", "Temporary Filesystem Mount Point",
                    "you do not need to change this, but we provide the option just in case your software " +
                    "is finicky.")
 
+pc.defineParameter("emailAddress", "Github Email Address", portal.ParameterType.STRING,"yuningc@umich.edu", longDescription = "your github email")
+pc.defineParameter("huggingfaceToken", "Huggingface Token", portal.ParameterType.STRING,"", longDescription = "your hugging face token")
+
 # Retrieve the values the user specifies during instantiation.
 params = pc.bindParameters()
 
@@ -120,7 +123,7 @@ for i in range(params.nodeCount):
         name = "node" + str(i)
         node = request.RawPC(name)
         pass
-    node.addService(pg.Execute(shell="sh", command="/local/repository/starter.sh"))
+    node.addService(pg.Execute(shell="sh", command=f"/local/repository/starter.sh {params.emailAddress} {params.huggingfaceToken}"))
     if params.osImage and params.osImage != "default":
         node.disk_image = params.osImage
         pass
