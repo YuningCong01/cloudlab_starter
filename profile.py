@@ -23,7 +23,7 @@ pc = portal.Context()
 request = pc.makeRequestRSpec()
 
 # Variable number of nodes.
-pc.defineParameter("nodeCount", "Number of Nodes", portal.ParameterType.INTEGER, 3,
+pc.defineParameter("nodeCount", "Number of Nodes", portal.ParameterType.INTEGER, 1,
                    longDescription="If you specify more then one node, " +
                    "we will create a lan for you.")
 
@@ -39,7 +39,7 @@ pc.defineParameter("osImage", "Select OS image",
 
 # Optional physical type for all nodes.
 pc.defineParameter("phystype",  "Optional physical node type",
-                   portal.ParameterType.STRING, "",
+                   portal.ParameterType.STRING, "d7525",
                    longDescription="Specify a physical node type (pc3000,d710,etc) " +
                    "instead of letting the resource mapper choose for you.")
 
@@ -65,7 +65,7 @@ pc.defineParameter("bestEffort",  "Best Effort", portal.ParameterType.BOOLEAN, F
 
 # Optional ephemeral blockstore
 pc.defineParameter("tempFileSystemSize", "Temporary Filesystem Size",
-                   portal.ParameterType.INTEGER, 0,advanced=True,
+                   portal.ParameterType.INTEGER, 50,advanced=True,
                    longDescription="The size in GB of a temporary file system to mount on each of your " +
                    "nodes. Temporary means that they are deleted when your experiment is terminated. " +
                    "The images provided by the system have small root partitions, so use this option " +
@@ -86,7 +86,7 @@ pc.defineParameter("tempFileSystemMount", "Temporary Filesystem Mount Point",
                    "is finicky.")
 
 pc.defineParameter("emailAddress", "Github Email Address", portal.ParameterType.STRING,"yuningc@umich.edu", longDescription = "your github email")
-pc.defineParameter("huggingfaceToken", "Huggingface Token", portal.ParameterType.STRING,"", longDescription = "your hugging face token")
+pc.defineParameter("huggingfaceToken", "Huggingface Token", portal.ParameterType.STRING,"EMPTY", longDescription = "your hugging face token")
 
 # Retrieve the values the user specifies during instantiation.
 params = pc.bindParameters()
@@ -123,7 +123,7 @@ for i in range(params.nodeCount):
         name = "node" + str(i)
         node = request.RawPC(name)
         pass
-    node.addService(pg.Execute(shell="sh", command="/local/repository/starter.sh {} {}".format(params.emailAddress, params.huggingfaceToken)))
+    node.addService(pg.Execute(shell="bash", command="bash /local/repository/starter.sh {} {}".format(params.emailAddress, params.huggingfaceToken)))
     if params.osImage and params.osImage != "default":
         node.disk_image = params.osImage
         pass

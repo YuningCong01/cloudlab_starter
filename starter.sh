@@ -38,12 +38,12 @@ echo "export HF_TOKEN=$HUGGINGFACE_TOKEN" >> ~/.bashrc
 echo 'export HF_HOME=/mydata/huggingface' >> ~/.bashrc
 
 # Install vllm
-sudo pip install vllm --target=/mydata --no-cache-dir -y
+sudo pip install vllm --target=/mydata --no-cache-dir
 
 
 # Setup github credentials
 # FIXME: Replace with your real email address; Add the cat result to the github
-ssh-keygen -t rsa -b 4096 -C "$EMAIL" -N ""
+ssh-keygen -t rsa -b 4096 -C "$EMAIL" -N "" -f ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub
 
 # Clone from private repo
