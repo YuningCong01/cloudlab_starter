@@ -5,7 +5,7 @@ hf_token=""
 
 # Function to print usage
 usage() {
-    echo "Usage: $0 --email <email_address> --token <huggingface_token>"
+    echo "Usage: $0"
     exit 1
 }
 
@@ -25,6 +25,8 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+sudo chmod -R 777 /mydata
 
 # Change tmp dir
 echo 'export PYTHONPATH=/mydata:$PYTHONPATH' >> ~/.bashrc
