@@ -43,7 +43,7 @@ sudo pip install vllm --target=/mydata --no-cache-dir -y
 
 # Setup github credentials
 # FIXME: Replace with your real email address; Add the cat result to the github
-ssh-keygen -t rsa -b 4096 -C "$EMAIL"
+ssh-keygen -t rsa -b 4096 -C "$EMAIL" -N ""
 cat ~/.ssh/id_rsa.pub
 
 # Clone from private repo
