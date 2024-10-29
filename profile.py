@@ -29,7 +29,7 @@ pc.defineParameter("nodeCount", "Number of Nodes", portal.ParameterType.INTEGER,
 
 # Pick your OS.
 imageList = [
-    ('urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU20-64-STD', 'UBUNTU 20.04')]
+    ('urn:publicid:IDN+wisc.cloudlab.us+image+michigan-bigdata-PG0:yuningc-A3', 'UBUNTU 20.04')]
 
 pc.defineParameter("osImage", "Select OS image",
                    portal.ParameterType.IMAGE,
